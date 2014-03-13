@@ -1,6 +1,0 @@
-EN serial_rx NULL /home/benjamin/Documents/Projet/Serie/module_com_serie/Rx.vhd sub00/vhpl02 1394707143
-EN serial_tx NULL /home/benjamin/Documents/Projet/Serie/module_com_serie/Tx.vhd sub00/vhpl00 1394707780
-EN serial_module NULL /home/benjamin/Documents/Projet/Serie/module_com_serie/module_serie.vhd sub00/vhpl04 1394711111
-AR serial_tx behavioral /home/benjamin/Documents/Projet/Serie/module_com_serie/Tx.vhd sub00/vhpl01 1394707781
-AR serial_module behavioral /home/benjamin/Documents/Projet/Serie/module_com_serie/module_serie.vhd sub00/vhpl05 1394710857
-AR serial_rx behavioral /home/benjamin/Documents/Projet/Serie/module_com_serie/Rx.vhd sub00/vhpl03 1394707144

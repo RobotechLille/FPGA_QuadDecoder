@@ -1,1 +1,0 @@
-xst -intstyle ise -ifn "/home/benjamin/Documents/Projet/Serie/module_com_serie/serial_module.xst" -ofn "/home/benjamin/Documents/Projet/Serie/module_com_serie/serial_module.syr" 
