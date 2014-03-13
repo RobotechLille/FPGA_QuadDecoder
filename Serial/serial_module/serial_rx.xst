@@ -1,0 +1,5 @@
+set -tmpdir "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/xst/projnav.tmp"
+set -xsthdpdir "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/xst"
+elaborate
+-ifn serial_rx.prj
+-ifmt mixed

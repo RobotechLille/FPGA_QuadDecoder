@@ -1,0 +1,22 @@
+V3 9
+EN work/serial_main 0 \
+      FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.vhd \
+      PB ieee/std_logic_1164 1381692176
+AR work/serial_main/Behavioral 0 \
+      FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.vhd \
+      EN work/serial_main 0
+FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd 2014/03/13.23:22:11 P.20131013
+EN work/serial_rx 1394751725 \
+      FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/serial_rx/Behavioral 1394751726 \
+      FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd \
+      EN work/serial_rx 1394751725
+FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd 2014/03/13.23:22:11 P.20131013
+EN work/serial_tx 1394751732 \
+      FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd \
+      PB ieee/std_logic_1164 1381692176
+AR work/serial_tx/Behavioral 1394751733 \
+      FL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd \
+      EN work/serial_tx 1394751732
