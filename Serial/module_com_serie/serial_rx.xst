@@ -1,0 +1,5 @@
+set -tmpdir "/home/benjamin/Documents/Projet/Serie/module_com_serie/xst/projnav.tmp"
+set -xsthdpdir "/home/benjamin/Documents/Projet/Serie/module_com_serie/xst"
+elaborate
+-ifn serial_rx.prj
+-ifmt mixed
