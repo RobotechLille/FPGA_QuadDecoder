@@ -10,7 +10,7 @@
 -- Tool versions: 
 -- Description: Module to manage the serial communication
 --
--- Dependencies: 
+-- Dependencies: serial_rx and serial_tx
 --
 -- Revision: 
 -- Revision 0.01 - File Created
@@ -34,9 +34,9 @@ Port(
 	iRx : in STD_LOGIC;
 	iEnableTransmit : in STD_LOGIC;
 -- outputs
---oDataReady : out STD_LOGIC;
---oTransmitComplete : out STD_LOGIC := '0';
-	oTx : in STD_LOGIC;
+	--oDataReady : out STD_LOGIC;
+	--oTransmitComplete : out STD_LOGIC := '0';
+	oTx : out STD_LOGIC;
 	oData : out STD_LOGIC_VECTOR((Param_nb_bit_data-1) downto 0):="00000000"
 );
 end serial_main;
@@ -82,13 +82,8 @@ end component;
 
 begin
 
-port map	(
-		-- Clock in ports
-			iClk           => iClk,
-			oTx  => oTx
-			
-		
-			);	
+rx : serial_rx port map	(iClk,iRx,oData);
+tx : serial_tx port map (iClk,iEnableTransmit,iDataToTransmit,oTx);	
 
 end Behavioral;
 

@@ -27,7 +27,7 @@ generic(
 	--generic
 		Param_clk_fq	: integer := 50000000;
 		Param_nb_bit_data : integer :=8;
-		Param_baud_rate	: integer := 115200 --9600
+		Param_baud_rate	: integer := 9600 
 	);	
 Port ( iClk : in STD_LOGIC;
 iRx : in STD_LOGIC;

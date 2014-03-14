@@ -1,5 +1,6 @@
-EN serial_rx NULL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd sub00/vhpl00 1394751725
-EN serial_main NULL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.vhd sub00/vhpl04 1394751763
-EN serial_tx NULL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd sub00/vhpl02 1394751732
-AR serial_tx behavioral /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd sub00/vhpl03 1394751733
-AR serial_rx behavioral /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd sub00/vhpl01 1394751726
+EN serial_rx NULL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd sub00/vhpl00 1394757513
+EN serial_main NULL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.vhd sub00/vhpl04 1394757517
+EN serial_tx NULL /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd sub00/vhpl02 1394757515
+AR serial_tx behavioral /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd sub00/vhpl03 1394757516
+AR serial_main behavioral /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.vhd sub00/vhpl05 1394757518
+AR serial_rx behavioral /home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd sub00/vhpl01 1394757514

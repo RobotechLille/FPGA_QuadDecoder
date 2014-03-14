@@ -1,0 +1,21 @@
+xst -intstyle ise -ifn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.xst" -ofn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s200-ft256-5 serial_main.ngc serial_main.ngd  
+map -intstyle ise -p xc3s200-ft256-5 -cm area -ir off -pr off -c 100 -o serial_main_map.ncd serial_main.ngd serial_main.pcf 
+xst -intstyle ise -ifn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.xst" -ofn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc xc3s200_constraints.ucf -p xc3s200-ft256-5 serial_main.ngc serial_main.ngd  
+map -intstyle ise -p xc3s200-ft256-5 -cm area -ir off -pr off -c 100 -o serial_main_map.ncd serial_main.ngd serial_main.pcf 
+par -w -intstyle ise -ol high -t 1 serial_main_map.ncd serial_main.ncd serial_main.pcf 
+trce -intstyle ise -v 3 -s 5 -n 3 -fastpaths -xml serial_main.twx serial_main.ncd -o serial_main.twr serial_main.pcf -ucf xc3s200_constraints.ucf 
+bitgen -intstyle ise -f serial_main.ut serial_main.ncd 
+xst -intstyle ise -ifn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.xst" -ofn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc xc3s200_constraints.ucf -p xc3s200-ft256-5 serial_main.ngc serial_main.ngd  
+map -intstyle ise -p xc3s200-ft256-5 -cm area -ir off -pr off -c 100 -o serial_main_map.ncd serial_main.ngd serial_main.pcf 
+par -w -intstyle ise -ol high -t 1 serial_main_map.ncd serial_main.ncd serial_main.pcf 
+trce -intstyle ise -v 3 -s 5 -n 3 -fastpaths -xml serial_main.twx serial_main.ncd -o serial_main.twr serial_main.pcf -ucf xc3s200_constraints.ucf 
+bitgen -intstyle ise -f serial_main.ut serial_main.ncd 
+xst -intstyle ise -ifn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.xst" -ofn "/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc xc3s200_constraints.ucf -p xc3s200-ft256-5 serial_main.ngc serial_main.ngd  
+map -intstyle ise -p xc3s200-ft256-5 -cm area -ir off -pr off -c 100 -o serial_main_map.ncd serial_main.ngd serial_main.pcf 
+par -w -intstyle ise -ol high -t 1 serial_main_map.ncd serial_main.ncd serial_main.pcf 
+trce -intstyle ise -v 3 -s 5 -n 3 -fastpaths -xml serial_main.twx serial_main.ncd -o serial_main.twr serial_main.pcf -ucf xc3s200_constraints.ucf 
+bitgen -intstyle ise -f serial_main.ut serial_main.ncd 

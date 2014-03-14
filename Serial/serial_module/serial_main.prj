@@ -1,1 +1,3 @@
+vhdl work "serial_tx.vhd"
+vhdl work "serial_rx.vhd"
 vhdl work "serial_main.vhd"
