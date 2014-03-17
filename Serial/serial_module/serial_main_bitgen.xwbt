@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.ncd
-OUTFILE=/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.bit
-FAMILY=Spartan3
-PART=xc3s200-5ft256
-WORKINGDIR=/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module
-LICENSE=WebPack
-USER_INFO=210859280_0_0_654
