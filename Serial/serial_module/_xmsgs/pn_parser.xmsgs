@@ -8,14 +8,5 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_main.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_rx.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/Serial/serial_module/serial_tx.vhd&quot; into library work</arg>
-</msg>
-
 </messages>
 

@@ -110,7 +110,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1394757519" xil_pn:in_ck="-6548515362547993144" xil_pn:name="TRANEXT_xstsynthesize_spartan3" xil_pn:prop_ck="1444714236553818754" xil_pn:start_ts="1394757508">
+    <transform xil_pn:end_ts="1395062721" xil_pn:in_ck="-6548515362547993144" xil_pn:name="TRANEXT_xstsynthesize_spartan3" xil_pn:prop_ck="1444714236553818754" xil_pn:start_ts="1395062710">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -132,19 +132,29 @@
     <transform xil_pn:end_ts="1394756690" xil_pn:in_ck="-8941550822812227082" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="325082217254585084" xil_pn:start_ts="1394756690">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
     </transform>
-    <transform xil_pn:end_ts="1394757526" xil_pn:in_ck="4095896337735177600" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="5668391780781897664" xil_pn:start_ts="1394757519">
+    <transform xil_pn:end_ts="1395062735" xil_pn:in_ck="4095896337735177600" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="5668391780781897664" xil_pn:start_ts="1395062723">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="_ngo"/>
       <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
       <outfile xil_pn:name="serial_main.bld"/>
       <outfile xil_pn:name="serial_main.ngd"/>
       <outfile xil_pn:name="serial_main_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1394757531" xil_pn:in_ck="5367700088140385377" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="3855906223012716089" xil_pn:start_ts="1394757526">
+    <transform xil_pn:end_ts="1395062744" xil_pn:in_ck="5367700088140385377" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="3855906223012716089" xil_pn:start_ts="1395062735">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
       <outfile xil_pn:name="serial_main.pcf"/>
       <outfile xil_pn:name="serial_main_map.map"/>
@@ -155,10 +165,13 @@
       <outfile xil_pn:name="serial_main_summary.xml"/>
       <outfile xil_pn:name="serial_main_usage.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1394757545" xil_pn:in_ck="-2615818795303660326" xil_pn:name="TRANEXT_par_spartan3" xil_pn:prop_ck="3333849164707216606" xil_pn:start_ts="1394757531">
+    <transform xil_pn:end_ts="1395062761" xil_pn:in_ck="-2615818795303660326" xil_pn:name="TRANEXT_par_spartan3" xil_pn:prop_ck="3333849164707216606" xil_pn:start_ts="1395062744">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
       <outfile xil_pn:name="serial_main.ncd"/>
       <outfile xil_pn:name="serial_main.pad"/>
@@ -170,9 +183,12 @@
       <outfile xil_pn:name="serial_main_pad.txt"/>
       <outfile xil_pn:name="serial_main_par.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1394757551" xil_pn:in_ck="4951900738947931719" xil_pn:name="TRANEXT_bitFile_spartan3" xil_pn:prop_ck="-2672950586390118423" xil_pn:start_ts="1394757545">
+    <transform xil_pn:end_ts="1395062768" xil_pn:in_ck="4951900738947931719" xil_pn:name="TRANEXT_bitFile_spartan3" xil_pn:prop_ck="-2672950586390118423" xil_pn:start_ts="1395062761">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
       <outfile xil_pn:name="serial_main.bgn"/>
       <outfile xil_pn:name="serial_main.bit"/>
@@ -182,9 +198,22 @@
       <outfile xil_pn:name="webtalk.log"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1394757545" xil_pn:in_ck="3510301698038923357" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416187" xil_pn:start_ts="1394757542">
+    <transform xil_pn:end_ts="1395062775" xil_pn:in_ck="4951900738947918865" xil_pn:name="TRAN_configureTargetDevice" xil_pn:prop_ck="-6745644827150672321" xil_pn:start_ts="1395062772">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+    </transform>
+    <transform xil_pn:end_ts="1395062784" xil_pn:in_ck="4951900738947918865" xil_pn:name="TRAN_genImpactFile" xil_pn:prop_ck="-7052584534157616599" xil_pn:start_ts="1395062778">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+    </transform>
+    <transform xil_pn:end_ts="1395062761" xil_pn:in_ck="3510301698038923357" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416187" xil_pn:start_ts="1395062758">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>
       <outfile xil_pn:name="serial_main.twr"/>
       <outfile xil_pn:name="serial_main.twx"/>

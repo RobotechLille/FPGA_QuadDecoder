@@ -33,6 +33,7 @@ Port(
 	iDataToTransmit : in STD_LOGIC_VECTOR ((Param_nb_bit_data - 1) downto 0);
 	iRx : in STD_LOGIC;
 	iEnableTransmit : in STD_LOGIC;
+	
 -- outputs
 	--oDataReady : out STD_LOGIC;
 	--oTransmitComplete : out STD_LOGIC := '0';
@@ -84,6 +85,8 @@ begin
 
 rx : serial_rx port map	(iClk,iRx,oData);
 tx : serial_tx port map (iClk,iEnableTransmit,iDataToTransmit,oTx);	
+
+--oData <= X"55";
 
 end Behavioral;
 

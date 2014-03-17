@@ -52,7 +52,7 @@ signal i: integer:=0;
 begin
 
 --Process Clk
-process(iClk,iRx)
+process(iClk,iRx,start,enable)
 begin
 	if iRx='0' then
 		if start='0' then
