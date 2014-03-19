@@ -23,14 +23,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity serial_main is
 generic(
 	--generic
-		Param_clk_fq	: integer := 50000000;
-		Param_nb_bit_data : integer :=8;
-		Param_baud_rate	: integer := 9600 
+		Param_clk_fq_main	: integer := 50000000;
+		Param_nb_bit_data_main : integer :=8;
+		Param_baud_rate_main	: integer := 115200 
 );
 Port(
 -- inputs
 	iClk : in STD_LOGIC;
-	iDataToTransmit : in STD_LOGIC_VECTOR ((Param_nb_bit_data - 1) downto 0);
+	iDataToTransmit : in STD_LOGIC_VECTOR ((Param_nb_bit_data_main - 1) downto 0);
 	iRx : in STD_LOGIC;
 	iEnableTransmit : in STD_LOGIC;
 	
@@ -38,7 +38,7 @@ Port(
 	--oDataReady : out STD_LOGIC;
 	--oTransmitComplete : out STD_LOGIC := '0';
 	oTx : out STD_LOGIC;
-	oData : out STD_LOGIC_VECTOR((Param_nb_bit_data-1) downto 0):="00000000"
+	oData : out STD_LOGIC_VECTOR((Param_nb_bit_data_main-1) downto 0):="00000000"
 );
 end serial_main;
 
@@ -52,14 +52,14 @@ architecture Behavioral of serial_main is
 component serial_rx is
 generic(
 	--generic
-		Param_clk_fq	: integer := 50000000;
-		Param_nb_bit_data : integer :=8;
-		Param_baud_rate	: integer := 115200 --9600
+		Param_clk_fq	: integer := Param_clk_fq_main;
+		Param_nb_bit_data : integer := Param_nb_bit_data_main;
+		Param_baud_rate	: integer := Param_baud_rate_main
 	);	
 Port ( iClk : in STD_LOGIC;
-iRx : in STD_LOGIC;
---oDataReady : out STD_LOGIC;
-oData : out STD_LOGIC_VECTOR((Param_nb_bit_data-1) downto 0):="00000000"
+		iRx : in STD_LOGIC;
+		--oDataReady : out STD_LOGIC;
+		oData : out STD_LOGIC_VECTOR((Param_nb_bit_data-1) downto 0):="00000000"
 );
 end component;
 
@@ -68,9 +68,9 @@ end component;
 component serial_tx is 
 generic(
 	--generic
-		Param_clk_fq	: integer := 50000000;
-		Param_nb_bit_data : integer :=8;
-		Param_baud_rate	: integer := 9600
+		Param_clk_fq	: integer := Param_clk_fq_main;
+		Param_nb_bit_data : integer := Param_nb_bit_data_main;
+		Param_baud_rate	: integer := Param_baud_rate_main
 	);	
 Port (iClk : in STD_LOGIC;
 		iEnableTransmit : in STD_LOGIC;
