@@ -8,7 +8,7 @@
 -- Project Name: FPGA_QuadDecoder
 -- Target Devices: 
 -- Tool versions: 
--- Description: Module to save data in order to do loopback control
+-- Description: Module to save/change data in order to do loopback control
 --
 -- Dependencies: 
 --
@@ -28,6 +28,8 @@ generic(
 	-- Settings
 		Param_clk_fq	: integer := 50000000;
 		Param_nb_bit_data : integer :=8;
+		Param_nb_bit_adresse : integer :=8;
+		Param_nb_slave : integer :=2;
 	-- Default values
 		-- Asservissement moteurs en vitesse
 		DefaultAsservMotG_KP : integer :=10;
@@ -44,8 +46,15 @@ generic(
 		DefaultAsservPolAngle_KD : integer :=0;
 		DefaultAsservPolDist_KP : integer :=10;
 		DefaultAsservPolDist_KI : integer :=0;
-		DefaultAsservPolDist_KD : integer :=0;	
+		DefaultAsservPolDist_KD : integer :=0
 	);	
+port(
+	iClk : in STD_LOGIC;
+	iAddresse : in STD_LOGIC_VECTOR (Param_nb_bit_adresse-1 downto 0);
+	iDataToChange : in STD_LOGIC_VECTOR(Param_nb_bit_data downto 0);
+	oData : out STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0);
+	oSignalOK : out STD_LOGIC_VECTOR(Param_nb_slave-1 downto 0) -- permet de dire à l'esclave si sa demande de données est acceptée 
+);
 end Register_module;
 
 architecture Behavioral of Register_module is
