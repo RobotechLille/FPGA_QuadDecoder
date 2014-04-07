@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------------------
 -- Company: Polytech Lille	
--- Engineer: Benjamin Lafit
+-- Engineers: Benjamin Lafit and Valentin Vergez
 -- 
 -- Create Date:    11:15:41 03/13/2014 
 -- Design Name: 
 -- Module Name:    serial_module - Behavioral 
--- Project Name: 
+-- Project Name: FPGA_QuadDecoder
 -- Target Devices: 
 -- Tool versions: 
 -- Description: Module to manage the serial communication

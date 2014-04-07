@@ -1,3 +1,23 @@
+----------------------------------------------------------------------------------
+-- Company: Polytech Lille	
+-- Engineers: Benjamin Lafit and Valentin Vergez
+-- 
+-- Create Date:    11:15:41 03/13/2014 
+-- Design Name: 
+-- Module Name:    pwm - Behavioral 
+-- Project Name: FPGA_QuadDecoder
+-- Target Devices: 
+-- Tool versions: 
+-- Description: Module to create a PWM signal
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use IEEE.STD_LOGIC_ARITH.ALL;

@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------------------
 -- Company: Polytech Lille
--- Engineer: Benjamin Lafit
+-- Engineers: Benjamin Lafit and Valentin Vergez
 -- 
 -- Create Date:    14:52:12 03/10/2014 
 -- Design Name: 
 -- Module Name:    serial_rx - Behavioral 
--- Project Name: 
+-- Project Name: FPGA_QuadDecoder
 -- Target Devices: 
 -- Tool versions: 
 -- Description: VHDL module which allow to receipt data by serial communication
