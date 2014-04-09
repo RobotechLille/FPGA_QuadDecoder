@@ -216,11 +216,40 @@ component top_moduleDeplacement is
 --		--generic
 --		);
 	Port ( 
+		-- Clock
 		iClk	: in STD_LOGIC;
-		iEncA : in STD_LOGIC;
-		iEncB : in STD_LOGIC;
-		iEncZ : in STD_LOGIC;
-		oLed1	: out STD_LOGIC
+		-- Encodeur
+			-- Encodeur Mesure Droit
+			iEncMesDA : in STD_LOGIC;
+			iEncMesDB : in STD_LOGIC;
+			iEncMesDZ : in STD_LOGIC;
+			-- Encodeur Mesure Gauche
+			iEncMesGA : in STD_LOGIC;
+			iEncMesGB : in STD_LOGIC;
+			iEncMesGZ : in STD_LOGIC;
+			-- Encodeur Moteur Droit
+			iEncMotDA : in STD_LOGIC;
+			iEncMotDB : in STD_LOGIC;
+			iEncMotDZ : in STD_LOGIC;
+			-- Encodeur Moteur Gauche
+			iEncMotGA : in STD_LOGIC;
+			iEncMotGB : in STD_LOGIC;
+			iEncMotGZ : in STD_LOGIC;
+		-- Moteur
+			-- Moteur Droit
+			oPwmMotD 	: out STD_LOGIC;
+			oBrakeMotD	: out STD_LOGIC;
+			oDirMotD 	: out STD_LOGIC;
+			-- Moteur Gauche
+			oPwmMotG 	: out STD_LOGIC;
+			oBrakeMotG	: out STD_LOGIC;
+			oDirMotG		: out STD_LOGIC;			
+		
+		-- Led
+		oLed1	: out STD_LOGIC;
+		oLed2	: out STD_LOGIC;
+		oLed3	: out STD_LOGIC;
+		oLed4	: out STD_LOGIC
 		);
 end component;
 
@@ -231,18 +260,41 @@ begin
 --		--generic
 --		)
 	Port map ( 
-	iClk	=> CLOCK_Y3,
-	iEncA => PMOD2_P1,
-	iEncB => PMOD2_P2,
-	iEncZ => PMOD2_P3,
-	oLed1 => GPIO_LED1
-		);
+		-- Clock
+		iClk	=> CLOCK_Y3,
+		-- Encodeur
+			-- Encodeur Mesure Droit
+			iEncMesDA => PMOD2_P1,
+			iEncMesDB => PMOD2_P2,
+			iEncMesDZ => PMOD2_P3,
+			-- Encodeur Mesure Gauche
+			iEncMesGA => '0',
+			iEncMesGB => '0',
+			iEncMesGZ => '0',
+			-- Encodeur Moteur Droit
+			iEncMotDA => '0',
+			iEncMotDB => '0',
+			iEncMotDZ => '0',
+			-- Encodeur Moteur Gauche
+			iEncMotGA => '0',
+			iEncMotGB => '0',
+			iEncMotGZ => '0',
+		-- Moteur
+			-- Moteur Droit
+			oPwmMotD 	=> PMOD1_P3,
+			oBrakeMotD	=> open,
+			oDirMotD 	=> PMOD1_P1,
+			-- Moteur Gauche
+			oPwmMotG 	=> PMOD1_P9,
+			oBrakeMotG	=> open,
+			oDirMotG	=> PMOD1_P7,
 		
-	-- Drive LED 
-	GPIO_LED2 <= PMOD1_P2;
-	GPIO_LED3 <= PMOD1_P3;
-	GPIO_LED4 <= PMOD1_P4;
-	
+		-- Led
+		oLed1	=> GPIO_LED1,
+		oLed2	=> GPIO_LED2,
+		oLed3	=> GPIO_LED3,
+		oLed4	=> GPIO_LED4
+		);	
 
 end Behavioral;
 
