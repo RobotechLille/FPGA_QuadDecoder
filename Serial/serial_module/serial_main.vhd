@@ -25,7 +25,7 @@ generic(
 	--generic
 		Param_clk_fq_main	: integer := 50000000;
 		Param_nb_bit_data_main : integer :=8;
-		Param_baud_rate_main	: integer := 115200 
+		Param_baud_rate_main	: integer := 9600 
 );
 Port(
 -- inputs
@@ -83,8 +83,18 @@ end component;
 
 begin
 
-rx : serial_rx port map	(iClk,iRx,oData);
-tx : serial_tx port map (iClk,iEnableTransmit,iDataToTransmit,oTx);	
+rx : serial_rx port map	(
+	iClk => iClk,
+	iRx => iRx,
+	oData => oData
+	);
+	
+tx : serial_tx port map (
+	iClk => iClk,
+	iEnableTransmit => iEnableTransmit,
+	iDataToTransmit => iDataToTransmit,
+	oTx => oTx
+	);	
 
 --oData <= X"55";
 

@@ -2,26 +2,26 @@
 
 #PACE: Start of PACE I/O Pin Assignments
 NET "iClk"  LOC = "T9"  ;
-NET "oData<0>"  LOC = "K12"  ;
-NET "oData<1>"  LOC = "P14"  ;
-NET "oData<2>"  LOC = "L12"  ;
-NET "oData<3>"  LOC = "N14"  ;
-NET "oData<4>"  LOC = "P13"  ;
-NET "oData<5>"  LOC = "N12"  ;
-NET "oData<6>"  LOC = "P12"  ;
-NET "oData<7>"  LOC = "P11"  ;
+#NET "oData<0>"  LOC = "K12"  ;
+#NET "oData<1>"  LOC = "P14"  ;
+#NET "oData<2>"  LOC = "L12"  ;
+#NET "oData<3>"  LOC = "N14"  ;
+#NET "oData<4>"  LOC = "P13"  ;
+#NET "oData<5>"  LOC = "N12"  ;
+#NET "oData<6>"  LOC = "P12"  ;
+#NET "oData<7>"  LOC = "P11"  ;
 NET "iRx"  LOC = "T13"  ;
 NET "oTx"  LOC = "R13"  ;
 #NET "oTransmitComplete LOC = "?";
-NET "iEnableTransmit"  LOC = "M13"  ;
-NET "iDataToTransmit<0>"  LOC = "F12"  ;
-NET "iDataToTransmit<1>"  LOC = "G12"  ;
-NET "iDataToTransmit<2>"  LOC = "H14"  ;
-NET "iDataToTransmit<3>"  LOC = "H13"  ;
-NET "iDataToTransmit<4>"  LOC = "J14"  ;
-NET "iDataToTransmit<5>"  LOC = "J13"  ;
-NET "iDataToTransmit<6>"  LOC = "K14"  ;
-NET "iDataToTransmit<7>"  LOC = "K13"  ;
+#NET "iEnableTransmit"  LOC = "M13"  ;
+#NET "iDataToTransmit<0>"  LOC = "F12"  ;
+#NET "iDataToTransmit<1>"  LOC = "G12"  ;
+#NET "iDataToTransmit<2>"  LOC = "H14"  ;
+#NET "iDataToTransmit<3>"  LOC = "H13"  ;
+#NET "iDataToTransmit<4>"  LOC = "J14"  ;
+#NET "iDataToTransmit<5>"  LOC = "J13"  ;
+#NET "iDataToTransmit<6>"  LOC = "K14"  ;
+#NET "iDataToTransmit<7>"  LOC = "K13"  ;
 #NET "oPwm" LOC = "E7"; #connector 4 on A2
 
 
