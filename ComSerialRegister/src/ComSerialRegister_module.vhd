@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    17:29:41 04/07/2014 
 -- Design Name: 
--- Module Name:    Main_module - Behavioral 
+-- Module Name:    ComSerialRegister_module - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -20,7 +20,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity Main_module is
+entity ComSerialRegister_module is
 generic(
 	Param_clk_fq	: integer := 50000000;
 	Param_nb_bit_data : integer :=	8;
@@ -32,9 +32,9 @@ Port(
 	iRx : in std_logic
 	
 );
-end Main_module;
+end ComSerialRegister_module;
 
-architecture Behavioral of Main_module is
+architecture Behavioral of ComSerialRegister_module is
 
 ----------------------------------------------------------------------------------
 -- Components
@@ -56,8 +56,8 @@ Port(
 	iEnableTransmit : in STD_LOGIC;
 	
 -- outputs
-	--oDataReady : out STD_LOGIC;
-	--oTransmitComplete : out STD_LOGIC := '0';
+	oDataReady : out STD_LOGIC;
+	oTransmitComplete : out STD_LOGIC := '0';
 	oTx : out STD_LOGIC;
 	oData : out STD_LOGIC_VECTOR((Param_nb_bit_data - 1) downto 0):="00000000"
 );
@@ -104,14 +104,20 @@ end component;
 -- Behavioral
 ------------------------------------------------------------------------------------
 --- Signaux
-signal Data : std_logic_vector ((Param_nb_bit_data - 1) downto 0);
+signal DataToSend : std_logic_vector ((Param_nb_bit_data - 1) downto 0);
+signal DataReceive : std_logic_vector ((Param_nb_bit_data - 1) downto 0);
 signal EnableTx : std_logic := '0';
-signal DataReceive : STD_LOGIC_VECTOR((Param_nb_bit_data-1) downto 0):="00000000";
+signal DataReady : std_logic := '0';
+signal TransmitComplete : std_logic := '0';
+signal order : std_logic_vector(Param_nb_bit_data-1 downto 0);
+signal initOk : std_logic := '0';
+signal endOk: std_logic := '0';
+signal receptError : std_logic := '0';
 signal RegI : STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0);
 signal regO : STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0);
 signal dataBuffer : std_logic_vector(Param_nb_bit_data-1 downto 0);
 signal startSend : std_logic_vector(4 downto 0); --5 bits pour pouvoir compter jusqu'a 23
-signal dataBufferPrev : std_logic_vector (Param_nb_bit_data-1 downto 0);
+
 
 --- Constantes 
 
@@ -148,7 +154,7 @@ alias asservMotDUse : STD_LOGIC_VECTOR ( 0 downto 0) is RegI ((21*Param_nb_bit_d
 
 begin 
 
-	serial_inst : serial_main
+	serial_inst : serial_module
 	generic map(
 		Param_clk_fq	=> Param_clk_fq,
 		Param_nb_bit_data => Param_nb_bit_data,
@@ -156,9 +162,11 @@ begin
 		)
 	port map(
 		iClk => iClk,
-		iDataToTransmit => Data,
+		iDataToTransmit => DataToSend,
 		iRx => iRx,
 		iEnableTransmit => EnableTx,
+		oDataReady => DataReady,
+		oTransmitComplete => TransmitComplete,
 		oTx => oTx,
 		oData => DataReceive
 	);
@@ -174,33 +182,47 @@ begin
 	begin
 		if iClk'event and iClk='1' then
 			-- Recuperer un ordre en communication serie
-			if (dataReceive=x"00") then 
-				dataBuffer <= DataReceive;
-				if(dataBuffer = x"61") then  --a
-					odoX<=dataBuffer;
-					startSend <= "00001";
-				end if;
-				
-				if(dataBuffer = x"62") then --b
-					odoY<=dataBuffer;
-					startSend <= "00010";
-				end if;
-					
-				-- Faire une lecture de se registre pour afficher la valeur sur le port série ou des leds
-				if(startSend = "00001") then 
-					Data <= odoX;
-					EnableTx <='1';
-				end if;
-				if(startSend = "00010") then 
-					Data <= odoY;
-					EnableTx <='1';
-				end if;
-				
-				if (EnableTx = '1') then
-					EnableTx <= '0';
-					startSend <= "00000";
-				end if;
-			--end if;
+			if (DataReceive=x"74") then -- Octet initialisation
+				initOk <= '1';
+			end if;
+			
+			if(initOk ='1') then 
+				enableTx <= '1';
+				DataToSend <= X"75";				
+			end if;
+			
+			if(TransmitComplete='1') then 
+				initOK <= '0';
+				enableTx <= '0';
+			end if;
+			
+			----------------------------------------------
+--				dataBuffer <= DataReceive;
+--				if(dataBuffer = x"61") then  --a
+--					odoX<=dataBuffer;
+--					startSend <= "00001";
+--				end if;
+--				
+--				if(dataBuffer = x"62") then --b
+--					odoY<=dataBuffer;
+--					startSend <= "00010";
+--				end if;
+--					
+--				-- Faire une lecture de se registre pour afficher la valeur sur le port série ou des leds
+--				if(startSend = "00001") then 
+--					Data <= odoX;
+--					EnableTx <='1';
+--				end if;
+--				if(startSend = "00010") then 
+--					Data <= odoY;
+--					EnableTx <='1';
+--				end if;
+--				
+--				if (EnableTx = '1') then
+--					EnableTx <= '0';
+--					startSend <= "00000";
+--				end if;
+			-----------------------------------------------------------------------------
 		end if;
 	end process;
 end Behavioral;

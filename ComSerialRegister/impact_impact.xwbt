@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/ComSerialRegister/impact.xsl
+OUTFILE=/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/ComSerialRegister/impact.xsl
+FAMILY=Multiple
+PART=Multiple
+WORKINGDIR=/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/ComSerialRegister
+LICENSE=iMPACT
+USER_INFO=iMPACT
