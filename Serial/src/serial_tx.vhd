@@ -31,8 +31,7 @@ generic(
 Port (iClk : in STD_LOGIC;
 		iEnableTransmit : in STD_LOGIC;
 		iDataToTransmit : in  STD_LOGIC_VECTOR ((Param_nb_bit_data - 1) downto 0);
-		--oLEDS : out STD_LOGIC_VECTOR (7 downto 0);
-		--oTransmitComplete : out STD_LOGIC := '0';
+		oTransmitComplete : out STD_LOGIC := '0';
 		oTx : out  STD_LOGIC :='1'
       );
 end serial_tx;
@@ -51,7 +50,6 @@ signal EnableTransmitPrec : STD_LOGIC :='0';
 begin
 
 DataToTransmit<=iDataToTransmit & '0' ; --concatenation avec bit de start
---oLEDS<= DataToTransmit(8 downto 1); --affichage sur leds de la data a transmettre
 
 process (iClk)
 	begin
@@ -59,7 +57,7 @@ process (iClk)
 		EnableTransmitPrec<=iEnableTransmit;
 		if Enable='0' and iEnableTransmit='1' and EnableTransmitPrec='0' then --transmission
 			Enable<='1';
-			--oTransmitComplete<='0';
+			oTransmitComplete<='0';
 		end if;
 	
 		if Enable='1' then
@@ -74,11 +72,11 @@ process (iClk)
 				cpt<=0;
 				Enable<='0';
 				oTx<='1';
-				--oTransmitComplete <='1';
+				oTransmitComplete <='1';
 			end if;
 		else 
 			oTx<='1';
-			--oTransmitComplete <='0';
+			oTransmitComplete <='0';
 		end if;
 	end if;
 	end process;
