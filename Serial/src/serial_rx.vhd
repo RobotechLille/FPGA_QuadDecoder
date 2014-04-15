@@ -31,7 +31,7 @@ generic(
 	);	
 Port ( iClk : in STD_LOGIC;
 		iRx : in STD_LOGIC;
-		--oDataReady : out STD_LOGIC;
+		oDataReady : out STD_LOGIC;
 		oData : out STD_LOGIC_VECTOR((Param_nb_bit_data-1) downto 0):="00000000"
 );
 end serial_rx;
@@ -58,9 +58,9 @@ if iClk'event and iClk='1' then --front montant
 				enable<=1;
 		end if;
 		
-		--if i<10 then 
-			--oDataReady<='0';
-		--end if;
+		if i<10 then 
+			oDataReady<='0';
+		end if;
 		
 		if enable=1 then
 			cpt<=cpt+1;
@@ -87,7 +87,7 @@ if iClk'event and iClk='1' then --front montant
 			i<=0;
 			cpt<=0;
 			enable<=0;
-			--oDataReady='1';
+			oDataReady <='1';
 			end if;
 	end if;
 end process;
