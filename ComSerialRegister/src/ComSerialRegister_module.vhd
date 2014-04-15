@@ -204,7 +204,6 @@ begin
 	
 	begin
 		oData<=DataReceive; --affichage sur les leds de la donnée reçu
-		
 		if iClk'event and iClk='1' then
 			-- Recuperer un ordre en communication serie
 			if (DataReceive=x"61") then -- Octet initialisation, exemple avec 'a'

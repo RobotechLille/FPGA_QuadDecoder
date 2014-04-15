@@ -22,7 +22,7 @@ NET "oTx"  LOC = "R13"  ;
 #NET "iDataToTransmit<5>"  LOC = "J13"  ;
 #NET "iDataToTransmit<6>"  LOC = "K14"  ;
 #NET "iDataToTransmit<7>"  LOC = "K13"  ;
-#NET "oPwm" LOC = "E7"; #connector 4 on A2
+#NET "oRxView" LOC = "E7"; #connector 4 on A2
 
 
 #PACE: Start of PACE Area Constraints
