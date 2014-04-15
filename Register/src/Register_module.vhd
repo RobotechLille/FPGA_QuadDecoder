@@ -29,8 +29,6 @@ generic(
 	-- Settings
 		Param_clk_fq	: integer := 50000000;
 		Param_nb_bit_data : integer :=8;
-		--Param_nb_bit_adresse : integer :=8;
-		--Param_nb_slave : integer :=2;
 	-- Default values
 		-- Asservissement moteurs en vitesse
 		DefaultAsservMotG_KP : integer :=10;
@@ -56,8 +54,8 @@ generic(
 	);	
 port(
 	iClk : in STD_LOGIC;
-	iRegData : in STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0);
-	oRegData : out STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0)
+	iRegData : in STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0); -- 21 data de nb_bit_data et 3 bits soit 24 adresses possibles
+	oRegData : out STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0)
 );
 end Register_module;
 
@@ -93,27 +91,6 @@ alias asservPolDist_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is iReg
 alias asservPolUse : STD_LOGIC_VECTOR ( 0 downto 0) is iRegData((21*Param_nb_bit_data) downto 21*Param_nb_bit_data); -- bool pour savoir si asservissement polaire utilisé
 alias asservMotGUse : STD_LOGIC_VECTOR ( 0 downto 0) is iRegData((21*Param_nb_bit_data)+1 downto (21*Param_nb_bit_data)+1); -- bool pour savoir si asservissement moteur gauche utilisé
 alias asservMotDUse : STD_LOGIC_VECTOR ( 0 downto 0) is iRegData((21*Param_nb_bit_data)+2 downto (21*Param_nb_bit_data)+2); -- bool pour savoir si asservissement moteur droit utilisé
-
---Initialization
---asservMotD_KP <= DefaultAsservMotD_KP;
---asservMotD_KI = DefaultAsservMotD_KI;
---asservMotD_KD = DefaultAsservMotD_KD;
---
---asservMotG_KP = DefaultAsservMotG_KP;
---asservMotG_KI = DefaultAsservMotG_KI;
---asservMotG_KD = DefaultAsservMotG_KD;
---
---asservPolAngle_KP = DefaultAsservPolAngle_KP;
---asservPolAngle_KI = DefaultAsservPolAngle_KI;
---asservPolAngle_KD = DefaultAsservPolAngle_KD;
---
---asservPolDist_KP = DefaultAsservPolDist_KP;
---asservPolDist_KI = DefaultAsservPolDist_KI;
---asservPolDist_KD = DefaultAsservPolDist_KD;
---
---asservPolUse = DefaultAsservPolUse;
---asservMotGUse = DefaultAsservMotGUse;
---asservMotDUse = DefaultAsservMotDUse;
 
 begin
 

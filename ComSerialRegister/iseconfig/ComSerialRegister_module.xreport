@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2014-04-11T01:59:10</DateModified>
+  <DateModified>2014-04-14T18:41:43</DateModified>
   <ModuleName>ComSerialRegister_module</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>/home/benjamin/Documents/Git/Projet_S8/FPGA_QuadDecoder/ComSerialRegister/iseconfig/ComSerialRegister_module.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/benjamin/Documents/Working_dir_ISE/ComSerialRegister</ImplementationReportsDirectory>
+  <ImplementationReportsDirectory>/home/benjamin/Documents/Working_dir_ISE/ComSerialRegister/</ImplementationReportsDirectory>
   <DateInitialized>2014-04-11T01:52:49</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

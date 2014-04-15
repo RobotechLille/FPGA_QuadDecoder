@@ -29,6 +29,7 @@ generic(
 Port(	
 	iClk : in std_logic;
 	oTx : out std_logic;
+	oData : out std_logic_vector(7 downto 0); --affichage sur les leds
 	iRx : in std_logic
 	
 );
@@ -95,8 +96,8 @@ generic(
 	);	
 port(
 	iClk : in STD_LOGIC;
-	iRegData : in STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0);
-	oRegData : out STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0)
+	iRegData : in STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0); -- 21 data de nb_bit_data et 3 bits soit 24 adresses possibles
+	oRegData : out STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0)
 );
 end component;
 
@@ -113,8 +114,8 @@ signal order : std_logic_vector(Param_nb_bit_data-1 downto 0);
 signal initOk : std_logic := '0';
 signal endOk: std_logic := '0';
 signal receptError : std_logic := '0';
-signal RegI : STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0);
-signal regO : STD_LOGIC_VECTOR((24*Param_nb_bit_data)-1 downto 0);
+signal RegI : STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0);
+signal regO : STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0);
 signal dataBuffer : std_logic_vector(Param_nb_bit_data-1 downto 0);
 signal startSend : std_logic_vector(4 downto 0); --5 bits pour pouvoir compter jusqu'a 23
 
@@ -152,6 +153,27 @@ alias asservPolUse : STD_LOGIC_VECTOR ( 0 downto 0) is RegI ((21*Param_nb_bit_da
 alias asservMotGUse : STD_LOGIC_VECTOR ( 0 downto 0) is RegI ((21*Param_nb_bit_data)+1 downto (21*Param_nb_bit_data)+1); -- bool pour savoir si asservissement moteur gauche utilisé
 alias asservMotDUse : STD_LOGIC_VECTOR ( 0 downto 0) is RegI ((21*Param_nb_bit_data)+2 downto (21*Param_nb_bit_data)+2); -- bool pour savoir si asservissement moteur droit utilisé
 
+--- Initialization
+--asservMotD_KP = DefaultAsservMotD_KP;
+--asservMotD_KI = DefaultAsservMotD_KI;
+--asservMotD_KD = DefaultAsservMotD_KD;
+--
+--asservMotG_KP = DefaultAsservMotG_KP;
+--asservMotG_KI = DefaultAsservMotG_KI;
+--asservMotG_KD = DefaultAsservMotG_KD;
+--
+--asservPolAngle_KP = DefaultAsservPolAngle_KP;
+--asservPolAngle_KI = DefaultAsservPolAngle_KI;
+--asservPolAngle_KD = DefaultAsservPolAngle_KD;
+--
+--asservPolDist_KP = DefaultAsservPolDist_KP;
+--asservPolDist_KI = DefaultAsservPolDist_KI;
+--asservPolDist_KD = DefaultAsservPolDist_KD;
+--
+--asservPolUse = DefaultAsservPolUse;
+--asservMotGUse = DefaultAsservMotGUse;
+--asservMotDUse = DefaultAsservMotDUse;
+
 begin 
 
 	serial_inst : serial_module
@@ -179,19 +201,22 @@ begin
 	);
 
 	process(iClk)
+	
 	begin
+		oData<=DataReceive; --affichage sur les leds de la donnée reçu
+		
 		if iClk'event and iClk='1' then
 			-- Recuperer un ordre en communication serie
-			if (DataReceive=x"74") then -- Octet initialisation
+			if (DataReceive=x"61") then -- Octet initialisation, exemple avec 'a'
 				initOk <= '1';
 			end if;
 			
 			if(initOk ='1') then 
 				enableTx <= '1';
-				DataToSend <= X"75";				
+				DataToSend <= X"62";	 --si initialisation OK on renvoi b 			
 			end if;
 			
-			if(TransmitComplete='1') then 
+			if(enableTx='1') then --RAZ pour autre reception
 				initOK <= '0';
 				enableTx <= '0';
 			end if;
