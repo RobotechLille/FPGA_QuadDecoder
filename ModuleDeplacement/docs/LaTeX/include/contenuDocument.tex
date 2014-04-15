@@ -1,0 +1,16 @@
+\newpage
+\subsection{Contenu du projet}
+Le sujet initial propose de réaliser un système simple sur cible FPGA permettant de :
+\begin{itemize}
+\item Lire et décoder des signaux en quadrature de phase en provenance d'une ou plusieurs roues codeuses ;
+\item Asservir un ou plusieurs moteurs, soit pas-à-pas soit à courant continu.
+\end{itemize}
+
+La cible visée est un FPGA de chez Xilinx (carte de développement LX9 à base de Spartan 3\footnote{Le Spartan 3 est un modèle de FPGA de la marque Xilinx}).\\
+En parallèle, une carte d'interface de puissance doit \^etre réalisée, c'est l'interface entre FPGA et moteurs.\\
+
+Les objectifs du sujet sont atteints. Dans ce document sera expliqué le principe du décodage de signaux utilisé, l'asservissement, la génération de signaux logique de commande du moteur, la carte de puissance d'interfaçage FPGA - Moteur ainsi qu'un élément supplémentaire.\\
+En effet, comme la finalité de ce projet est d'être utilisé dans un sous-module complet, nous avons commencé à implémenter une interface série avec une mémoire interne au FPGA. L'objectif est d'avoir un module fonctionnel, complètement configurable et pilotable par liaison série. Ainsi, les utilisateurs futures n'auront qu'à effectuer les branchements du module à leur robot et à le commander avec leurs autres modules électroniques, via liaison série. Ils n'auront pas à se soucier du fonctionnement interne, il s'agira d'une boîte noire.\\
+
+Toutefois, comme ce sous-module peut-être sujet à des améliorations, les codes sources sont bien sûr fournis aux utilisateurs et doivent permettre une mise à jour facile de l'application.\\
+C'est en tout cas pour ce soucis d'utilisation facile que nous avons choisis ce système de pilotage série.\\

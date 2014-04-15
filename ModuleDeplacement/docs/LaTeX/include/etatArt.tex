@@ -1,0 +1,11 @@
+\newpage
+\subsection{\'Etat de l'art}
+Le principe de base des encodeurs à signaux en quadrature de phases est de générer deux signaux carrés identiques, décalées de $\pm90\deg$. Ce décalage contient une information importante, il permet de savoir si le codeur rotatif tourner dans le sens trigonométrique ou anti-trigonométrique.\\
+
+Ces signaux carrés proviennent en fait de deux capteurs qui signale le passage ou non d'un marquage placé sur un disque tournant avec le rotor du codeur. \\ Si le disque ne contient d'un marquage, une période du signal indiquera que le codeur a effectué un tour complet.\\
+L'encodeur que nous utilisons possède lui 1024 marques sur son disque, on dit alors que le codeur a une résolution de 1024 ticks par tours.\\
+
+Pour interpréter ces ticks et ce décalage puis les traduire en une position, en un comptage/décomptage, on utilise traditionnellement des circuits logiques intégré dédiés à cela. On peut aussi utiliser un micro-contrôleur pour effectuer cette t\^ache, seulement si le codeur tourne vite, à raison de plusieurs milliers de ticks par tours, les fréquences des signaux à interpréter deviennent importantes et trop encombrantes pour le micro-contrôleur.\\
+L'inconvénient des circuit intégrés est leur difficulté d'intégration. Pour une utilisation ponctuelle, leur volume est trop important au regard de leur fonction et il est parfois difficile de les interfacer au reste de l'application (gros bus de données). Parfois ils sont intégrés aux micro-contrôleurs, le problème devient alors leur nombre limité ou le prix.\\
+La solution FPGA se présente comme un intermédiaire très intéressant. Le principe de fonctionnement du FPGA permet de retrouver les performances identiques aux circuits intégrés (puisqu'il s'agit simplement d'intégrer le fonctionnement de ces circuits dans le FPGA). Il permet aussi d'obtenir un système beaucoup plus complet, comme celui qu'assumerait un micro-contrôleur, mais avec une fiabilité et une robustesse inégalable.\\
+L'inconvénient est l'aspect statique de l'application et la difficulté d'implémentation, c'est d'ailleurs pour cette raison qu'il est rare de trouver des systèmes de déplacement complet gérés ainsi.\\

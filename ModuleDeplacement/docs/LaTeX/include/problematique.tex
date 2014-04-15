@@ -1,0 +1,10 @@
+\subsection{Problématique}
+Notre projet s'inscrit dans le cadre du club Robotech Lille, club de robotique de l'école Polytech Lille, et de la Coupe de France de Robotique organisée par Planètes Sciences.\\
+
+Cette Coupe de Robotique exige la conception et la réalisation de robots mobiles autonomes.\\
+A Robotech Lille, les informations propre au déplacement sont données par ces fameux encodeurs à signaux à quadratures de phases.\\
+Il est donc nécessaire que soit intégrée au robot un système de décodage des signaux à quadratures de phase.\\
+
+Précédemment, le robot était géré par un unique micro-contrôleur, aussi en charge du décodage de ces signaux.\\
+Cette année est née la volonté d'attribuer la gestion complète du déplacement du robot à un sous-module, facilement réutilisable et indépendant de la structure du robot. Il a été décidé, pour des raisons que nous allons voir ensuite, que ce sous-module allait \^etre géré par un FPGA\footnote{Field-Programmable Gate Array, un réseau de portes programmables (Voir 
+\href{http://fr.wikipedia.org/wiki/Circuit_logique_programmable}{Wikipedia : Circuits Programmables})}. La gestion du décodage des signaux en quadrature de phase doit donc \^etre elle aussi assumée par le FPGA, c'est à cette partie là que nous nous intéressons.\\
