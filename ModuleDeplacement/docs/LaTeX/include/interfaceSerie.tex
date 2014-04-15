@@ -18,8 +18,13 @@ Lorsque i=nombre bit de données + 2 (le nombre de bit de données est paramétr
 Nous écrivons donc la donnée ainsi reçue sur le registre de sortie de manière inversée (oData(0)=Data\_next(8) ...).
 
 \subsection{Emission}
-Ce programme, sur chaque front montant va commencer la transmission si le bit iEnableTransmit est à l'état chaud. A ce moment là on va incrémenter un compteur qui
+Ce programme, sur chaque front montant va commencer la transmission si le bit iEnableTransmit est à l'état haud. A ce moment là on va incrémenter un compteur qui
 permettra de faire une communication à un debit donné. C'est à dire que pour une communication à 9600 baud par exemple, on doit laisser le bit de data à son état 
-pendant 5208 coups d'horloge avec un horloge à 50MHz.    
+pendant 5208 coups d'horloge avec un horloge à 50MHz. De plus, ce module établie une communication série avec un bit de start (passage de 1 à 0), un nombre de bit de donné
+paramétrable (doit être le même en emission et réception) et un bit de stop.
+On avons donc une communication très simple, sans détection/correction d'erreurs.
 
 \subsection{Module de gestion}
+Le module de gestion permettra d'instancier les deux composants précédemment créés et de faire un mappage complet des entrées sorties. Ainsi nous n'aurons plus qu'un module
+général où toutes les entrées sorties seront déclarées. De même, c'est dans ce fichier où il suffira de changer les différents paramètres génériques pour configurer la communication
+(fréquence d'horloge, débit de communication, nombre de bit de données).
