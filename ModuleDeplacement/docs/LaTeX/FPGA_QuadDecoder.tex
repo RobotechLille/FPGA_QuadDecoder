@@ -144,39 +144,12 @@
 	% NB : Include créer des nouvelles pages pour inclure le contenu
 	% Input inclus le contenu directement dans le texte
 	
-	% Decodage
-		% Principe
 
-		% Adaptation de tensions		
+	\include{include/decodage}
+	\include{include/asservissement}	
+	
 		
-		% Problème de rebonds
-		
-	% Asservissement
-		% Principe
-	\begin{center}
-	\begin{tikzpicture}
-	\sbEntree{E}
-	\sbComp{comp}{E}                 
-	\sbRelier[$E_1$]{E}{comp}
-	\sbBloc{reg}{Régulateur}{comp}   
-	\sbRelier[$\epsilon$]{comp}{reg}
-	\sbBloc{pwm}{PWM}{reg}         
-	\sbRelier[C]{reg}{pwm}    
-	\sbBloc{sys}{Système}{pwm}       
-	\sbRelier[U]{pwm}{sys}
-	\sbSortie{S}{sys}                
-	\sbRelier[$S_1$]{sys}{S}
-	\sbDecaleNoeudy[4]{S}{U}
-	\sbBlocr{cap}{Mesure (QuadDecoder)}{U}        
-	\sbRelieryx{sys-S}{cap}
-	\sbRelierxy[m]{cap}{comp}
-	\end{tikzpicture}
-	\end{center}
-		
-		% Numérique
-		
-		% Asservissement polaire
-			% Principe
+	
 		
 	% Interface série
 	\FloatBarrier
