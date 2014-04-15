@@ -105,53 +105,57 @@ end component;
 -- Behavioral
 ------------------------------------------------------------------------------------
 --- Signaux
-signal DataToSend : std_logic_vector ((Param_nb_bit_data - 1) downto 0);
-signal DataReceive : std_logic_vector ((Param_nb_bit_data - 1) downto 0);
-signal EnableTx : std_logic := '0';
-signal DataReady : std_logic := '0';
-signal TransmitComplete : std_logic := '0';
-signal order : std_logic_vector(Param_nb_bit_data-1 downto 0);
+signal dataToSend : std_logic_vector ((Param_nb_bit_data - 1) downto 0);
+signal dataReceive : std_logic_vector ((Param_nb_bit_data - 1) downto 0);
+signal add :  std_logic_vector ((Param_nb_bit_data - 1) downto 0);
+signal enableTx : std_logic := '0';
+signal dataReady : std_logic := '0';
+signal transmitComplete : std_logic := '0';
 signal initOk : std_logic := '0';
 signal endOk: std_logic := '0';
 signal receptError : std_logic := '0';
-signal RegI : STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0);
+signal regI : STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0);
 signal regO : STD_LOGIC_VECTOR((21*Param_nb_bit_data)+2 downto 0);
-signal dataBuffer : std_logic_vector(Param_nb_bit_data-1 downto 0);
-signal startSend : std_logic_vector(4 downto 0); --5 bits pour pouvoir compter jusqu'a 23
-
+signal data : std_logic_vector(Param_nb_bit_data-1 downto 0);
+signal addReg : std_logic_vector(4 downto 0); --5 bits pour pouvoir compter jusqu'a 23
+signal lecture : std_logic;
+signal ecriture : std_logic;
+signal finOK : std_logic;
+signal addOK : std_logic;
+signal dataOK : std_logic;
 
 --- Constantes 
 
 --- Alias
 	-- Odometrie
-alias odoX : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((1*Param_nb_bit_data)-1 downto 0); --odometrie X
-alias odoY : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((2*Param_nb_bit_data)-1 downto 1*Param_nb_bit_data); --odometrie Y
-alias odoPhi : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((3*Param_nb_bit_data)-1 downto 2*Param_nb_bit_data); --odometrie Y
+alias odoX : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((1*Param_nb_bit_data)-1 downto 0); --odometrie X
+alias odoY : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((2*Param_nb_bit_data)-1 downto 1*Param_nb_bit_data); --odometrie Y
+alias odoPhi : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((3*Param_nb_bit_data)-1 downto 2*Param_nb_bit_data); --odometrie Y
 	-- Encode
-alias encMotD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((4*Param_nb_bit_data)-1 downto 3*Param_nb_bit_data); --encodeur moteur droit
-alias encMotG : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((5*Param_nb_bit_data)-1 downto 4*Param_nb_bit_data); --encodeur moteur gauche
-alias encMesD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((6*Param_nb_bit_data)-1 downto 5*Param_nb_bit_data); --encodeur mesure droit
-alias encMesG : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((7*Param_nb_bit_data)-1 downto 6*Param_nb_bit_data); --encodeur mesure gauche
+alias encMotD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((4*Param_nb_bit_data)-1 downto 3*Param_nb_bit_data); --encodeur moteur droit
+alias encMotG : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((5*Param_nb_bit_data)-1 downto 4*Param_nb_bit_data); --encodeur moteur gauche
+alias encMesD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((6*Param_nb_bit_data)-1 downto 5*Param_nb_bit_data); --encodeur mesure droit
+alias encMesG : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((7*Param_nb_bit_data)-1 downto 6*Param_nb_bit_data); --encodeur mesure gauche
 	-- Asservissement vitesse
-alias asservMotD_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((8*Param_nb_bit_data)-1 downto 7*Param_nb_bit_data); -- KP asservissement vitesse moteur droit
-alias asservMotD_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((9*Param_nb_bit_data)-1 downto 8*Param_nb_bit_data); -- KI asservissement vitesse moteur droit
-alias asservMotD_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((10*Param_nb_bit_data)-1 downto 9*Param_nb_bit_data); -- KD asservissement vitesse moteur droit
-alias asservMotG_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((11*Param_nb_bit_data)-1 downto 10*Param_nb_bit_data); -- KP asservissement vitesse moteur gauche
-alias asservMotG_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((12*Param_nb_bit_data)-1 downto 11*Param_nb_bit_data); -- KI asservissement vitesse moteur gauche
-alias asservMotG_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((13*Param_nb_bit_data)-1 downto 12*Param_nb_bit_data); -- KD asservissement vitesse moteur gauche
-alias asservMotD_consigne : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((14*Param_nb_bit_data)-1 downto 13*Param_nb_bit_data); -- consigne asservissement vitesse moteur droit
-alias asservMotG_consigne : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((15*Param_nb_bit_data)-1 downto 14*Param_nb_bit_data); -- consigne asservissement vitesse moteur gauche
+alias asservMotD_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((8*Param_nb_bit_data)-1 downto 7*Param_nb_bit_data); -- KP asservissement vitesse moteur droit
+alias asservMotD_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((9*Param_nb_bit_data)-1 downto 8*Param_nb_bit_data); -- KI asservissement vitesse moteur droit
+alias asservMotD_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((10*Param_nb_bit_data)-1 downto 9*Param_nb_bit_data); -- KD asservissement vitesse moteur droit
+alias asservMotG_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((11*Param_nb_bit_data)-1 downto 10*Param_nb_bit_data); -- KP asservissement vitesse moteur gauche
+alias asservMotG_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((12*Param_nb_bit_data)-1 downto 11*Param_nb_bit_data); -- KI asservissement vitesse moteur gauche
+alias asservMotG_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((13*Param_nb_bit_data)-1 downto 12*Param_nb_bit_data); -- KD asservissement vitesse moteur gauche
+alias asservMotD_consigne : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((14*Param_nb_bit_data)-1 downto 13*Param_nb_bit_data); -- consigne asservissement vitesse moteur droit
+alias asservMotG_consigne : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((15*Param_nb_bit_data)-1 downto 14*Param_nb_bit_data); -- consigne asservissement vitesse moteur gauche
 	-- Asservissement polaire
-alias asservPolAngle_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((16*Param_nb_bit_data)-1 downto 15*Param_nb_bit_data); -- KP asservissement polaire en angle
-alias asservPolAngle_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((17*Param_nb_bit_data)-1 downto 16*Param_nb_bit_data); -- KI asservissement polaire en angle
-alias asservPolAngle_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((18*Param_nb_bit_data)-1 downto 17*Param_nb_bit_data); -- KD asservissement polaire en angle
-alias asservPolDist_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((19*Param_nb_bit_data)-1 downto 18*Param_nb_bit_data); -- KP asservissement polaire en distance
-alias asservPolDist_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((20*Param_nb_bit_data)-1 downto 19*Param_nb_bit_data); -- KI asservissement polaire en distance
-alias asservPolDist_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is RegI ((21*Param_nb_bit_data)-1 downto 20*Param_nb_bit_data); -- KD asservissement polaire en distance
+alias asservPolAngle_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((16*Param_nb_bit_data)-1 downto 15*Param_nb_bit_data); -- KP asservissement polaire en angle
+alias asservPolAngle_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((17*Param_nb_bit_data)-1 downto 16*Param_nb_bit_data); -- KI asservissement polaire en angle
+alias asservPolAngle_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((18*Param_nb_bit_data)-1 downto 17*Param_nb_bit_data); -- KD asservissement polaire en angle
+alias asservPolDist_KP : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((19*Param_nb_bit_data)-1 downto 18*Param_nb_bit_data); -- KP asservissement polaire en distance
+alias asservPolDist_KI : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((20*Param_nb_bit_data)-1 downto 19*Param_nb_bit_data); -- KI asservissement polaire en distance
+alias asservPolDist_KD : STD_LOGIC_VECTOR (Param_nb_bit_data-1 downto 0) is regI ((21*Param_nb_bit_data)-1 downto 20*Param_nb_bit_data); -- KD asservissement polaire en distance
 	-- Use
-alias asservPolUse : STD_LOGIC_VECTOR ( 0 downto 0) is RegI ((21*Param_nb_bit_data) downto 21*Param_nb_bit_data); -- bool pour savoir si asservissement polaire utilisé
-alias asservMotGUse : STD_LOGIC_VECTOR ( 0 downto 0) is RegI ((21*Param_nb_bit_data)+1 downto (21*Param_nb_bit_data)+1); -- bool pour savoir si asservissement moteur gauche utilisé
-alias asservMotDUse : STD_LOGIC_VECTOR ( 0 downto 0) is RegI ((21*Param_nb_bit_data)+2 downto (21*Param_nb_bit_data)+2); -- bool pour savoir si asservissement moteur droit utilisé
+alias asservPolUse : STD_LOGIC_VECTOR ( 0 downto 0) is regI ((21*Param_nb_bit_data) downto 21*Param_nb_bit_data); -- bool pour savoir si asservissement polaire utilisé
+alias asservMotGUse : STD_LOGIC_VECTOR ( 0 downto 0) is regI ((21*Param_nb_bit_data)+1 downto (21*Param_nb_bit_data)+1); -- bool pour savoir si asservissement moteur gauche utilisé
+alias asservMotDUse : STD_LOGIC_VECTOR ( 0 downto 0) is regI ((21*Param_nb_bit_data)+2 downto (21*Param_nb_bit_data)+2); -- bool pour savoir si asservissement moteur droit utilisé
 
 --- Initialization
 --asservMotD_KP = DefaultAsservMotD_KP;
@@ -184,67 +188,95 @@ begin
 		)
 	port map(
 		iClk => iClk,
-		iDataToTransmit => DataToSend,
+		iDataToTransmit => dataToSend,
 		iRx => iRx,
-		iEnableTransmit => EnableTx,
-		oDataReady => DataReady,
-		oTransmitComplete => TransmitComplete,
+		iEnableTransmit => enableTx,
+		oDataReady => dataReady,
+		oTransmitComplete => transmitComplete,
 		oTx => oTx,
-		oData => DataReceive
+		oData => dataReceive
 	);
 				
 	register_inst : register_module
 	port map(
 	iClk => iClk,
-	iRegData  => RegI,
-	oRegData => RegO
+	iRegData  => regI,
+	oRegData => regO
 	);
 
 	process(iClk)
 	
 	begin
-		oData<=DataReceive; --affichage sur les leds de la donnée reçu
+	
+		------------ TEST du protocole -----------------
+		
+		oData<=dataReceive; --affichage sur les leds de la donnée reçue
 		if iClk'event and iClk='1' then
 			-- Recuperer un ordre en communication serie
-			if (DataReceive=x"61") then -- Octet initialisation, exemple avec 'a'
+			if (dataReceive=x"00" and dataReady='1' and lecture ='0' and ecriture ='0') then -- Octet initialisation
 				initOk <= '1';
 			end if;
 			
-			if(initOk ='1') then 
-				enableTx <= '1';
-				DataToSend <= X"62";	 --si initialisation OK on renvoi b 			
+			if(initOk ='1') then  -- attente octet ordre
+				if(dataReceive=X"01" and dataReady='1') then  
+					lecture <= '1';
+					initOk<='0';
+				end if;
+				
+				if(dataReceive=X"02" and dataReady='1') then
+					ecriture <= '1';
+					initOk<='0';
+				end if;	
 			end if;
 			
-			if(enableTx='1') then --RAZ pour autre reception
-				initOK <= '0';
-				enableTx <= '0';
+			if((ecriture ='1' or lecture ='1') and addOK='0' and dataOK='0' and finOK='0') then -- recuperation de l'adresse
+				if(dataReady='1') then
+					add<=dataReceive;
+					addOK<='1';
+				end if;
 			end if;
+
+			if(addOk='1') then  --recuperation de la donnée
+				if(dataReady='1') then
+					data<=dataReceive;
+					addOK<='0';
+					dataOK<='1';
+				end if;
+			end if;
+
+			if(dataOK='1') then --recuperation de l'octet de fin
+				if(dataReady='1' and dataReceive=X"FF") then
+					finOK<='1';
+					dataOK<='0';
+				end if;
+			end if;
+
 			
-			----------------------------------------------
---				dataBuffer <= DataReceive;
---				if(dataBuffer = x"61") then  --a
---					odoX<=dataBuffer;
---					startSend <= "00001";
+		--------------- TEST du registre avec envoi/écriture par communication série -------------------------
+--				data <= dataReceive;
+--				if(data = x"61") then  --a
+--					odoX<=data;
+--					addReg <= "00001";
 --				end if;
 --				
---				if(dataBuffer = x"62") then --b
---					odoY<=dataBuffer;
---					startSend <= "00010";
+--				if(data = x"62") then --b
+--					odoY<=data;
+--					addReg <= "00010";
 --				end if;
 --					
 --				-- Faire une lecture de se registre pour afficher la valeur sur le port série ou des leds
---				if(startSend = "00001") then 
---					Data <= odoX;
---					EnableTx <='1';
+--				if(addReg = "00001") then 
+--					dataToSend <= odoX;
+--					enableTx <='1';
 --				end if;
---				if(startSend = "00010") then 
---					Data <= odoY;
---					EnableTx <='1';
+--				if(addReg = "00010") then 
+--					dataToSend <= odoY;
+--					enableTx <='1';
 --				end if;
 --				
---				if (EnableTx = '1') then
---					EnableTx <= '0';
---					startSend <= "00000";
+--				if (enableTx = '1') then
+--					enableTx <= '0';
+--					addReg <= "00000";
 --				end if;
 			-----------------------------------------------------------------------------
 		end if;
