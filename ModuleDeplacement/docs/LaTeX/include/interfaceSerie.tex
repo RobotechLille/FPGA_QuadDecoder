@@ -2,9 +2,9 @@
 Dans le but d'établir une communication entre le Raspberry (partie intelligente) et le FPGA nous avons adopter un mode de communication série. Ce protocole étant relativement simple à 
 coder et à mettre en place, c'est pourquoi nous avons décider de l'utiliser au sein du robot pour l'échange de données.
 
-\subsection{Reception}
+\subsection{Réception}
 Ce programme agit sur chaque front montant de l'horloge. Son but sera de permettre la réception des
-données à 9600 bauds(debit paramétrable par une variable générique).
+données à 9600 bauds(débit paramétrable par une variable générique).
 A chaque front montant de l'horloge,nous incrémentons un compteur
 de 1 jusqu'à compter la période d'un bit (5208 dans le cas d'une transmission à 9600 bauds avec un horloge de 50MHz). Lorsque ce chiffre est atteint nous récupérons la
 valeur du bit Rx et la stockons dans la variable data\_next par décalage à chaque fois. De cette
@@ -17,11 +17,11 @@ valeur.
 Lorsque i=nombre bit de données + 2 (le nombre de bit de données est paramétrable par une variable générique), tous les bits du messages ont été enregistrés.
 Nous écrivons donc la donnée ainsi reçue sur le registre de sortie de manière inversée (oData(0)=Data\_next(8) ...).
 
-\subsection{Emission}
-Ce programme, sur chaque front montant va commencer la transmission si le bit iEnableTransmit est à l'état haud. A ce moment là on va incrémenter un compteur qui
-permettra de faire une communication à un debit donné. C'est à dire que pour une communication à 9600 baud par exemple, on doit laisser le bit de data à son état 
+\subsection{Émission}
+Ce programme, sur chaque front montant va commencer la transmission si le bit iEnableTransmit est à l'état haut. A ce moment là on va incrémenter un compteur qui
+permettra de faire une communication à un débit donné. C'est à dire que pour une communication à 9600 baud par exemple, on doit laisser le bit de data à son état 
 pendant 5208 coups d'horloge avec un horloge à 50MHz. De plus, ce module établie une communication série avec un bit de start (passage de 1 à 0), un nombre de bit de donné
-paramétrable (doit être le même en emission et réception) et un bit de stop.
+paramétrable (doit être le même en émission et réception) et un bit de stop.
 On avons donc une communication très simple, sans détection/correction d'erreurs.
 
 \subsection{Module de gestion}
