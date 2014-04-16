@@ -43,7 +43,7 @@ constant Cst_DivF : integer := (Param_clk_fq/Param_baud_rate);
 constant Cst_fq_init : integer := Cst_DivF/2;
 
 -- Signaux
-signal Data_next : STD_LOGIC_VECTOR (Param_nb_bit_data downto 0); -- mémoire data
+signal Data_next : STD_LOGIC_VECTOR (Param_nb_bit_data downto 0); -- memoire data
 signal cpt: integer:= 0 ; -- compteur interne
 signal enable: integer:=0;
 signal i: integer:=0;
@@ -70,13 +70,13 @@ if iClk'event and iClk='1' then --front montant
 		end if;
 		
 		if cpt=Cst_DivF and i<(Param_nb_bit_data + 2) then 
-			Data_next<=Data_next((Param_nb_bit_data - 1) downto 0) & iRx; --le remplir à l'envers
+			Data_next<=Data_next((Param_nb_bit_data - 1) downto 0) & iRx; --le remplir a l'envers
 			i<=i+1;
 			cpt<=0;
 		end if;
 		
 		if i=(Param_nb_bit_data + 2) then -- recuperation de tous les bits
-			oData(0)<=Data_next(8); --changer pour avoir un truc parametrable (après avoir fait changement sur Data_next)
+			oData(0)<=Data_next(8); --changer pour avoir un truc parametrable (apres avoir fait changement sur Data_next)
 			oData(1)<=Data_next(7);
 			oData(2)<=Data_next(6);
 			oData(3)<=Data_next(5);
