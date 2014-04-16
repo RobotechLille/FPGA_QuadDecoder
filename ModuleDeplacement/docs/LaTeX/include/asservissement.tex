@@ -1,0 +1,33 @@
+\section{Asservissement}
+Le principe de l'asservissement que l'on souhaite faire ici est assez simple, nous cherchons simplement à obtenir une preuve de concept. Il faut que l'on puisse piloter un moteur à courant continu via une consigne et une mesure obtenue par les codeurs.\\
+
+La commande du moteur se fait à l'aide d'un signal à modulation de largeur d'impulsions (MLI ou PWM) que l'on injecte dans une carte de puissance en charge du pilotage du robot. Ces deux parties seront détaillées un peu plus après dans le rapport.\\
+
+A partir donc d'une consigne obtenue d'un encodeur, nous voulons asservir un moteur en position, gr\^ace à la mesure de position retournée par son encodeur intégré.\\ Le schéma bloc du système est le suivant.\\
+
+	\begin{center}
+	\begin{tikzpicture}
+	\sbEntree{E}
+	\sbComp{comp}{E}                 
+	\sbRelier[$E_1$]{E}{comp}
+	\sbBloc{reg}{Régulateur}{comp}   
+	\sbRelier[$\epsilon$]{comp}{reg}
+	\sbBloc{pwm}{PWM}{reg}         
+	\sbRelier[C]{reg}{pwm}    
+	\sbBloc{sys}{Système}{pwm}       
+	\sbRelier[U]{pwm}{sys}
+	\sbSortie{S}{sys}                
+	\sbRelier[$S_1$]{sys}{S}
+	\sbDecaleNoeudy[4]{S}{U}
+	\sbBlocr{cap}{Mesure (QuadDecoder)}{U}        
+	\sbRelieryx{sys-S}{cap}
+	\sbRelierxy[m]{cap}{comp}
+	\end{tikzpicture}
+	\end{center}
+		
+	Le correcteur utilisé ici est un simple correcteur proportionnel.\\
+	Une fois implémenté, nous avons un moteur qui mime les mouvements effectués par le codeur. C'est assez basique mais ça nous assure que c'est une chose parfaitement réalisable et que nous avons les éléments nécessaires pour le faire.\\
+		% Numérique
+		
+		% Asservissement polaire
+			% Principe
