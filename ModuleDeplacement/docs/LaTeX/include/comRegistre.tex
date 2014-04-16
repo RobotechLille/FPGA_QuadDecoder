@@ -1,0 +1,27 @@
+\section {Module Registre}
+Afin de pouvoir réaliser l'asservissement des moteurs, des données doivent être enregistrées sur une mémoire qui sera accessible par le module d'asservissement 
+et par un module qui traitera les informations reçues sur le port série. 
+
+Cette mémoire sera faite au moyen d'un gros registre découpé en différentes données(comme la valeur des correcteurs, des encodeurs, de l'odométrie...) . 
+Le module d'asservissement aura un accès direct au registre sans passerelle, mais les informations reçues par le port série sera traité dans un module à part.
+Ce module va ``écouter'' les données sur le port série et fera les actions necessaires. Ces actions pourront être la lecture d'une donnée du registre mais aussi 
+l'écriture afin de changer des valeurs telle que demander au robot d'aller plus vite ou moins vite ou de tourner d'un angle particulier.
+
+
+Afin de traiter correctement les informations reçues, nous avons mis en place le protocole suivant :
+
+\begin{itemize}
+
+\item Premier octet, initialisation : 0x00
+\item Deuxième octet, ordre :
+  \begin{itemize} 
+    \item 0x01 : lecture
+    \item 0x02 : écriture
+   \end{itemize}
+\item Troisième octet, adresse : entre 0x00 et 0x17 (24 adresses possibles)
+\item Quatrième octet, données : entre 0x00 et 0xFF (en cas de lecture 0x55)
+\item Cinquième octet, fin : 0xFF
+\end{itemize}
+
+
+Le FPGA n'aura jamais à demander d'informations au Raspberry par conséquent, lorsqu'il y aura une demande de lecture, le FPGA renverra directement la valeur demandée sans utilisation de protocole particulier.

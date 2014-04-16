@@ -25,7 +25,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity pwm is
    port (iClk: in STD_LOGIC;
-        iDutyCycle : in STD_LOGIC_VECTOR (7 downto 0); --rapport cyclique (de 0 à 255)
+        iDutyCycle : in STD_LOGIC_VECTOR (7 downto 0); --rapport cyclique (de 0 a 255)
         oPwm : out STD_lOGIC); -- sortie
 end entity pwm;
 
